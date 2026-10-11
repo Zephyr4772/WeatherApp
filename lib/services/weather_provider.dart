@@ -5,7 +5,12 @@ import 'weather_service.dart';
 import '../models/weather_model.dart';
 
 class WeatherProvider extends ChangeNotifier {
-  final WeatherService _weatherService = WeatherService(apiKey: '01b8005b76c85fcec8e7100c922b18ac');
+  // Supplied at build time -- never commit a key:
+  //   flutter run --dart-define=OWM_API_KEY=your_key
+  // Get a free key at https://home.openweathermap.org/api_keys
+  static const String _apiKey = String.fromEnvironment('OWM_API_KEY');
+
+  final WeatherService _weatherService = WeatherService(apiKey: _apiKey);
 
   Weather? _weatherData;
   List<Weather>? _forecastData;
